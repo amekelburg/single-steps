@@ -1,0 +1,26 @@
+.container
+  .row
+    .col-md-12
+      %h3= link_to @project.name, @project
+  .row
+    .col-md-8
+      %h2.task{class: "task--#{@task.status}"}
+        = @task.name  
+        - if @task.inprogress?
+          = "(in progress)"
+          
+    .col-md-4
+      = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
+    .col-md-12
+      = "Relies on: #{@task.prereqs}"
+  .row
+    .col-sm-12
+      %p= @task.description
+      
+  - if @task.children.any?
+    - @task.children.each do |task|  
+      .col-md-6.task-list
+        %strong= task.name
+        %ul
+          - task.children.each do |sub_task|
+            = render 'task', task: sub_task    

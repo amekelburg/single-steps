@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'closure_tree'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
@@ -19,13 +20,16 @@ group :development do
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
+gem 'bootstrap_form'
 gem 'devise'
 gem 'haml-rails'
 gem 'high_voltage'
-gem 'mysql2', '~> 0.3.18'
+#gem 'mysql2', '~> 0.3.18'
+gem 'pg'
 gem 'pundit'
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'foreman'
   gem 'guard-bundler'
   gem 'guard-rails'

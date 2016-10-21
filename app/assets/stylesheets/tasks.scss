@@ -1,0 +1,16 @@
+.task-list {
+  ul, li {
+    list-style: none;
+  }
+}
+
+@import '_variables';
+.task--complete {
+  color: $complete;
+}
+.task--inprogress {
+  color: $inprogress;
+}
+.task--excluded {
+  color: $excluded;
+}

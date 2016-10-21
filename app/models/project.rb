@@ -27,7 +27,7 @@ class Project < ApplicationRecord
   end
   
   def init_tasks
-    tasks.clear
+    tasks.delete_all
     task_groups = TasksParser.parse_tasks
     task_groups.each do |key, task_def|
       t = add_task(task_def)

@@ -1,13 +1,14 @@
-- skip_children ||= false
+- skip_children ||= task.excluded?
 %li{class: "task task--#{task.status}"}
   - if !task.children.any?
     = form_for [task.project, task] do |f|
-      = f.check_box :included?, onclick: 'form.submit()'
-      = f.label :excluded?, task.name
+      = f.check_box "task_#{task.id}_complete?", onclick: 'form.submit()', checked: task.complete?
+      = f.label "task_#{task.id}_complete?", task.name
   - else
     = task.name
     - if !skip_children
       %ul
         - task.children.each do |sub_task|
-          = render sub_task
+          - if !task.excluded?
+            = render sub_task
     

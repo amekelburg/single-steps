@@ -7,10 +7,19 @@
 @import '_variables';
 .task--complete {
   color: $complete;
+  a, a:visited, a:hover, a:link {
+    color: $complete;    
+  }
 }
 .task--inprogress {
   color: $inprogress;
+  a, a:visited, a:hover, a:link {
+    color: $inprogress;
+  }
 }
 .task--excluded {
   color: $excluded;
+  a, a:visited, a:hover, a:link {
+    color: $excluded;
+  }
 }

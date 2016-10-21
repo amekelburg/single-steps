@@ -16,4 +16,5 @@
       .task-list
         %ul
           - @tasks.each do |t|
-            = render t, skip_children: true
+            %li{class: "task task--#{t.status}"}
+              = link_to t.name, project_task_path(t.project, t)

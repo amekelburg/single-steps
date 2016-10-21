@@ -1,10 +1,18 @@
 require 'csv'
 class TasksParser
-  #Task_Name,icon8,Google Icon,Section,Template_Name,Template_URL,Prereqs,Description
+  #Task_Name,order,icon8,Google Icon,Section,Template_Name,Template_URL,Prereqs,Description
+  def self.tasks
+    @@tasks ||= self.parse_tasks
+  end
+  
   def self.parse_tasks
     tasks = {}
     i = 0
+    rows = []
     CSV.read(Rails.root.join('config','task-definitions.csv'), headers: true).each do |row|
+      rows << row
+    end
+    rows.sort{|r1,r2| r1["order"].to_i<=>r2["order"].to_i}.each do |row|
       td = TaskDefinition.new
       td.name = row["Task_Name"]
       td.icon_name= row["icon8"]
@@ -43,7 +51,7 @@ class TasksParser
         parent_section = td_section
       end
       td.section = parent_section
-      td.sort_order = parent_section.tasks.count
+      td.sort_order = row["order"]
       #tasks[td.name]=td
       parent_section.tasks[td.name] = td
     end

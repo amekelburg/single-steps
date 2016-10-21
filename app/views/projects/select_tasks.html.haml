@@ -8,4 +8,4 @@
         %strong= task.name
         %ul
           - task.children.each do |sub_task|
-            = render sub_task
+            = render 'tasks/include_task', task: sub_task

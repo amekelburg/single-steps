@@ -16,5 +16,5 @@
       .task-list
         %ul
           - @tasks.each do |t|
-            %li{class: "task task--#{t.status}"}
+            %li{class: "task task--#{t.status} task--group"}
               = link_to t.name, project_task_path(t.project, t)

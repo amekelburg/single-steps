@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
     member do
       get :select_tasks
+      get :unassign_user
     end
   end
   

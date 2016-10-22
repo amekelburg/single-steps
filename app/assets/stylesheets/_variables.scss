@@ -10,3 +10,10 @@ $inprogress: $orange;
 $excluded: $light-gray;
 
 $paragraph-color: $dark-gray;
+
+
+.text-paragraph {
+  max-width: 600px;
+  line-height: 1.6em;
+  color: $paragraph-color;
+}

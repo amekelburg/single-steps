@@ -5,13 +5,15 @@ class Project < ApplicationRecord
   after_create :init_tasks
   
   has_many :tasks
+  has_and_belongs_to_many :users
+  
   
   validates :name, uniqueness: { case_sensitive: false}
   validates_presence_of :name, :pin
   
   
-  def self.find_by_name_nad_pin(name, pin)
-    self.where(name: name.to_s.strip, pin: pin.to_s.strip.downcase).first
+  def self.find_by_name_and_pin(name, pin)
+    self.where(pin: pin.to_s.strip.upcase).where("lower(name) = ?", name.to_s.strip.downcase).first
   end
   
   
@@ -24,7 +26,7 @@ class Project < ApplicationRecord
     self.name = self.name.to_s.strip
   end
   def clean_pin
-    self.pin = self.pin.to_s.strip.downcase
+    self.pin = self.pin.to_s.strip.upcase
   end
   
   def init_tasks

@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :unassign_user, :select_tasks]
   # GET /projects
   # GET /projects.json
   def index
-    @projects = []
     if current_user
       @projects = current_user.projects
+    else
+      @projects = []
     end
   end
 
@@ -17,6 +18,9 @@ class ProjectsController < ApplicationController
     @project = Project.find_by_name_and_pin(name, pin)
     if @project
       flash[:notice] = "Found project #{name}"
+      if current_user
+        current_user.add_project(@project)
+      end
       redirect_to project_path(@project)
     else
       flash[:error] = "Could not find project '#{name}' with pin '#{pin}'"
@@ -25,7 +29,6 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = Project.find(params[:id])
     @tasks = @project.tasks.roots
   end
 
@@ -36,11 +39,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
   end
   
   def select_tasks
-    @project = Project.find(params[:id])
     @tasks = @project.tasks.roots
   end
 
@@ -51,6 +52,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        if current_user
+          current_user.add_project(@project)
+        end
         format.html { redirect_to select_tasks_project_path(@project), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -83,6 +87,14 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def unassign_user
+    if current_user
+      current_user.remove_project(@project)
+    end
+    redirect_to projects_path
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   has_many :tasks
   
   validates :name, uniqueness: { case_sensitive: false}
+  validates_presence_of :name, :pin
   
   
   def self.find_by_name_nad_pin(name, pin)

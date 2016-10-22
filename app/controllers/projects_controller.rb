@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to select_tasks_project_path(@project), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }

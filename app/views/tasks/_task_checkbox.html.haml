@@ -1,7 +1,7 @@
 - label = label || nil
 - if task.completable?
   = form_for [task.project, task], :html=>{class: "task__checkbox #{label ? 'task__checkbox--labeled' : ''}"} do |f|
-    = f.check_box "task_#{task.id}_complete?", onclick: 'window.showWait(); form.submit()', checked: task.complete?
+    = f.check_box "task_#{task.id}_complete?", onclick: 'SingleSteps.showWait(); form.submit()', checked: task.complete?
     - if label
       = f.label "task_#{task.id}_complete?", label
 - else

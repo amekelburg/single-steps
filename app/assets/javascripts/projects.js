@@ -1,10 +1,10 @@
 (function() {
+  this.SingleSteps || (this.SingleSteps = {});
 
-  this.showWait = function() {
+  SingleSteps.showWait = function() {
     $('#modal-wait').modal({
       backdrop: 'static',
       keyboard: false
     })
   }
-
 }).call(this);

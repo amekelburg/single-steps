@@ -1,4 +1,4 @@
 - label ||= render 'tasks/iconed_task', task: task
 = form_for [task.project, task], :html=>{class: 'task__checkbox task__checkbox--labeled'} do |f|
-  = f.check_box "task_#{task.id}_included", onclick: 'window.showWait(); form.submit()', checked: task.included?
+  = f.check_box "task_#{task.id}_included", onclick: 'SingleSteps.showWait(); form.submit()', checked: task.included?
   = f.label "task_#{task.id}_included", label

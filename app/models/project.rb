@@ -1,3 +1,4 @@
+require 'tasks_parser'
 class Project < ApplicationRecord
   # Remove extra whitespace so find-by-name-and-pin can be cleaner
   

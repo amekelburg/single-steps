@@ -1,4 +1,5 @@
 require 'csv'
+require 'task_definition'
 class TasksParser
   #Task_Name,order,icon8,Google Icon,Section,Template_Name,Template_URL,Prereqs,Description
   def self.tasks

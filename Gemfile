@@ -19,6 +19,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+source "https://rails-assets.org" do
+  gem "rails-assets-tether"
+end
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'bootstrap_form'
 gem 'devise'

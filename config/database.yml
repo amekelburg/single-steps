@@ -74,10 +74,4 @@ test:
   username: single_steps
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: single-steps_production
-  host: localhost
-  port: 5432
-  username: single_steps
+  url: <%= ENV['HEROKU_POSTGRESQL_IVORY_URL'] %>

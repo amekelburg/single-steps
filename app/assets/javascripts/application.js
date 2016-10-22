@@ -15,9 +15,3 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-window.showWait = function() {
-  $('#modal-wait').modal({
-    backdrop: 'static',
-    keyboard: false
-  })
-}

@@ -33,6 +33,9 @@ class Project < ApplicationRecord
       t = add_task(task_def)
     end
   end
+  
+  def populate_prereqs
+  end
 
   def add_task(task_def)
     t = Task.new(task_def.model_attributes)

@@ -1,10 +1,35 @@
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+@import 'bootstrap/grid';
+@import '_variables';
+
 .task-list {
+  ul {
+    @extend .container;
+  }
   ul, li {
     list-style: none;
   }
+  li.task--group {
+    @extend .row;
+    font-weight: bold;
+    font-size: 1.5rem;
+    li.task--group {
+      font-weight: normal;
+      font-size: 1rem;
+    }
+    ul {
+      margin-bottom: 2em;
+    }
+    li.task--single {
+      font-weight: normal;
+      font-size: 1rem;
+      @extend .col-md-6;
+      padding-bottom: .25rem;
+    }
+  }
 }
 
-@import '_variables';
 .task--complete {
   color: $complete;
   a, a:visited, a:hover, a:link {
@@ -21,5 +46,15 @@
   color: $excluded;
   a, a:visited, a:hover, a:link {
     color: $excluded;
+  }
+}
+
+form.task__checkbox {
+  display: inline-block;
+  input[type=checkbox] {
+    vertical-align: 15%;
+  }
+  label {
+    display: inline;
   }
 }

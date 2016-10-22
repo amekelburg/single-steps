@@ -7,7 +7,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       t.string :section
       t.string :template_name
       t.string :template_url
-      t.string :prereqs
+      t.text :prereqs
       t.string :description
       t.integer :project_id
       t.integer :parent_id
@@ -16,6 +16,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :tasks, :project_id
+    add_index :tasks, :name
     add_index :tasks, :parent_id
   end
 end

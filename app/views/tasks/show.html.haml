@@ -5,14 +5,24 @@
   .row
     .col-md-8
       %h2.task{class: "task--#{@task.status}"}
-        = @task.name  
-        - if @task.inprogress?
-          = "(in progress)"
+        - if @task.included?
+          = render 'task_checkbox', task: @task          
+        = "#{@task.name} (#{@task.status_label})"
+      - if @task.excluded?
+        = render 'include_task_checkbox', task: @task, label: "Add to project"
           
     .col-md-4
-      = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
-    .col-md-12
-      = "Relies on: #{@task.prereqs}"
+      - if @task.has_template?
+        = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
+      - if @task.has_downloadable_template?
+        = link_to "Download Template as XLSX", @task.template_download_url
+      
+    - if  @task.prereq_tasks.any?
+      .col-md-12
+        Relies on
+        - @task.prereq_tasks.each do |pre_task|
+          %span.task{class: "task--#{pre_task.status}"}
+            = link_to pre_task.name, project_task_path(pre_task.project, pre_task)
   .row
     .col-sm-12
       %p= @task.description

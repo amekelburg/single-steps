@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20161021195934) do
     t.string   "section"
     t.string   "template_name"
     t.string   "template_url"
-    t.string   "prereqs"
+    t.text     "prereqs"
     t.string   "description"
     t.integer  "project_id"
     t.integer  "parent_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20161021195934) do
     t.integer  "state",         default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["name"], name: "index_tasks_on_name", using: :btree
     t.index ["parent_id"], name: "index_tasks_on_parent_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end

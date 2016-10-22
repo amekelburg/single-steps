@@ -1,0 +1,3 @@
+- if task.completable?
+  = form_for [task.project, task], :html=>{class: 'task__checkbox'} do |f|
+    = f.check_box "task_#{task.id}_complete?", onclick: 'form.submit()', checked: task.complete?

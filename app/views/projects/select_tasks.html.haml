@@ -1,11 +1,12 @@
 .container
-  %h2 
-    Select Tasks for 
-    = link_to @project.name, @project
   .row
-    - @tasks.each do |task|      
-      .col-md-6.task-list
-        %strong= task.name
+    .col-xs-12
+      %h2 
+        Select Tasks for 
+        = link_to @project.name, @project
+  .row
+    .col-xs-12
+      .task-list
         %ul
-          - task.children.each do |sub_task|
-            = render 'tasks/include_task', task: sub_task
+          - @tasks.each do |task|      
+            = render 'tasks/include_task', task: task

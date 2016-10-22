@@ -3,9 +3,10 @@
   - if !task.children.any?
     = render 'tasks/include_task_checkbox', task: task
   - else
-    = task.name
+    = render 'tasks/iconed_task', task: task
     - if !skip_children
-      %ul
-        - task.children.each do |sub_task|
-          = render 'tasks/include_task', task: sub_task
+      .task-list
+        %ul
+          - task.children.each do |sub_task|
+            = render 'tasks/include_task', task: sub_task
     

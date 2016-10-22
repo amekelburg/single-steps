@@ -1,0 +1,7 @@
+- large = large || false
+- if !task.icon_path.blank?
+  %span.task-with-icon
+    %img.task-icon{src: large ? task.large_icon_path : task.icon_path}
+    = task.name
+- else 
+  = task.name

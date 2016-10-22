@@ -3,15 +3,33 @@
 @import 'bootstrap/grid';
 @import '_variables';
 
+
+.task--info {
+  margin-bottom: 1em;
+}
+
+.task--extras {
+  margin-bottom: 1em;
+}
+
+.task--description {
+  p {
+    max-width: 600px;
+    line-height: 1.6em;
+  }
+}
+
 .task-list {
+  //@extend .container;
   ul {
-    @extend .container;
+    @extend .row;
+    padding: 0;
   }
   ul, li {
     list-style: none;
   }
   li.task--group {
-    @extend .row;
+    @extend .col-md-12;
     font-weight: bold;
     font-size: 1.5rem;
     li.task--group {
@@ -21,21 +39,16 @@
     ul {
       margin-bottom: 2em;
     }
-    li.task--single {
-      font-weight: normal;
-      font-size: 1rem;
-      @extend .col-md-6;
-      padding-bottom: .25rem;
-    }
   }
+  li.task--single {
+    font-weight: normal;
+    font-size: 1rem;
+    @extend .col-md-6;
+    padding-bottom: .25rem;
+  }
+  
 }
 
-.task--complete {
-  color: $complete;
-  a, a:visited, a:hover, a:link {
-    color: $complete;    
-  }
-}
 .task--inprogress {
   color: $inprogress;
   a, a:visited, a:hover, a:link {
@@ -48,13 +61,34 @@
     color: $excluded;
   }
 }
+.task--complete {
+  color: $complete;
+  a, a:visited, a:hover, a:link {
+    color: $complete;    
+  }
+}
+
+form.task__checkbox, .task__checkbox--sub {
+  width: 20px;
+  min-height: 1px;
+  display: inline-block;
+}
+
+form.task__checkbox--labeled {
+  width: auto;
+}
+
 
 form.task__checkbox {
   display: inline-block;
   input[type=checkbox] {
-    vertical-align: 15%;
+    vertical-align: 2px;
   }
   label {
     display: inline;
   }
+}
+
+.task-icon {
+  display: inline;
 }

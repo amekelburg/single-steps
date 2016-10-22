@@ -1,3 +1,9 @@
-$complete: green;
-$inprogress: orange;
-$excluded: gray;
+$green: #1cc605;
+$gray: gray;
+$light-gray: #bbb;
+$orange: #ed7f02;
+
+
+$complete: $green;
+$inprogress: $orange;
+$excluded: $light-gray;

@@ -1,11 +1,16 @@
 class Task < ApplicationRecord
-  has_closure_tree order: 'sort_order'
+  has_closure_tree #order: 'sort_order'
+  default_scope { order('sort_order') }
   
   enum state: [:excluded, :inprogress, :complete]
   
   belongs_to :project
   
   serialize :prereqs, Array
+  
+  def large_icon_path
+    icon_path.gsub('/24/', '/48/').gsub('24.png', '48.png')
+  end
   
   def has_template?
     !template_url.blank?
@@ -52,6 +57,10 @@ class Task < ApplicationRecord
   
   def completable?
     self.included? && !self.children.any?
+  end
+  
+  def includable?
+    !children.any?
   end
   
   def included?

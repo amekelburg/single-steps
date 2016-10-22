@@ -1,36 +1,53 @@
-.container
-  .row
-    .col-md-12
-      %h3= link_to @project.name, @project
-  .row
-    .col-md-8
-      %h2.task{class: "task--#{@task.status}"}
-        - if @task.included?
-          = render 'task_checkbox', task: @task          
-        = "#{@task.name} (#{@task.status_label})"
-      - if @task.excluded?
-        = render 'include_task_checkbox', task: @task, label: "Add to project"
-          
-    .col-md-4
-      - if @task.has_template?
-        = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
-      - if @task.has_downloadable_template?
-        = link_to "Download Template as XLSX", @task.template_download_url
-      
-    - if  @task.prereq_tasks.any?
+.container.task
+  .project--info
+    .row
       .col-md-12
-        Relies on
-        - @task.prereq_tasks.each do |pre_task|
-          %span.task{class: "task--#{pre_task.status}"}
-            = link_to pre_task.name, project_task_path(pre_task.project, pre_task)
-  .row
-    .col-sm-12
-      %p= @task.description
+        %h3= link_to @project.name, @project
+  .task--info
+    .row
+      .col-md-8
+        %h2.task{class: "task--#{@task.status}"}
+          = render 'iconed_task', task: @task, large: true
+          = "(#{@task.status_label})"
+        - if @task.included? 
+          = render 'task_checkbox', task: @task, label: (@task.complete? ? "Mark incomplete" : "Mark Complete")
+        - if @task.excluded? && @task.includable?
+          = render 'include_task_checkbox', task: @task, label: "Add to project"
+          
+      .col-md-4
+        - if @task.has_template?
+          = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
+        - if @task.has_downloadable_template?
+          = link_to "Download Template as XLSX", @task.template_download_url
+      
+  .task--extras
+    .row
+      - if  @task.prereq_tasks.any? || @task.parent
+        .col-md-6
+          - if @task.parent
+            Task Group:
+            = render 'tasks/parent_task_group', task: @task.parent
+      
+        .col-md-6
+          - if @task.completable?
+            Relies on:
+            - if @task.prereq_tasks.any?
+              - @task.prereq_tasks.each do |pre_task|
+                %span.task{class: "task--#{pre_task.status}"}
+                  = link_to project_task_path(pre_task.project, pre_task) do
+                    = render 'tasks/iconed_task', task: pre_task
+            - else
+              none
+  .task--description
+    .row
+      .col-sm-12
+        %p= @task.description
       
   - if @task.children.any?
-    - @task.children.each do |task|  
-      .col-md-6.task-list
-        %strong= task.name
-        %ul
-          - task.children.each do |sub_task|
-            = render 'task', task: sub_task    
+    .task--tasks
+      .row
+        .col-xs-12
+          .task-list
+            %ul
+              - @task.children.each do |sub_task|
+                = render 'task', task: sub_task    

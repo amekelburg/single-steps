@@ -20,10 +20,10 @@ class Project < ApplicationRecord
   
   private
   def clean_name
-    self.name = self.name.strip
+    self.name = self.name.to_s.strip
   end
   def clean_pin
-    self.pin = self.pin.strip.downcase
+    self.pin = self.pin.to_s.strip.downcase
   end
   
   def init_tasks

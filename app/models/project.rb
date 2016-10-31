@@ -11,7 +11,7 @@ class Project < ApplicationRecord
   before_validation :clean_name, :clean_pin
   after_create :init_tasks
   
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_and_belongs_to_many :users
   
   

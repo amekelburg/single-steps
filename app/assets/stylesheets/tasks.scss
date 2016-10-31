@@ -48,23 +48,36 @@
   
 }
 
+@mixin task-action-links {
+  .task-action-link {
+    a {
+      color: blue;
+      font-size: .8em;
+      text-decoration: underline;
+    }
+  }
+}
+
 .task--inprogress {
   color: $inprogress;
   a, a:visited, a:hover, a:link {
     color: $inprogress;
   }
+  @include task-action-links;
 }
 .task--excluded {
   color: $excluded;
   a, a:visited, a:hover, a:link {
     color: $excluded;
   }
+  @include task-action-links;
 }
 .task--complete {
   color: $complete;
   a, a:visited, a:hover, a:link {
     color: $complete;    
   }
+  @include task-action-links;
 }
 
 form.task__checkbox, .task__checkbox--sub {
@@ -91,3 +104,4 @@ form.task__checkbox {
 .task-icon {
   display: inline;
 }
+

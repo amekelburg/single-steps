@@ -3,9 +3,21 @@
   = render 'tasks/task_checkbox', task: task
   = link_to project_task_path(task.project, task) do
     = render 'tasks/iconed_task', task: task
+  - if task.completable?
+    %span{id: "task-#{task.id}-include", class: 'task-action-link task-link--exclude'}
+      = link_to 'remove', exclude_project_task_path(task.project, task), remote: true    
+  -else
+    %span{id: "task-#{task.id}-include", class: 'task-action-link task-link--include'}
+      = link_to '+add', include_project_task_path(task.project, task), remote: true    
+  
   - if !skip_children && task.children.any?
     .task-list
       %ul
         - task.children.each do |sub_task|
           = render sub_task
     
+  :javascript
+    $("#task-#{task.id} .task-action-link a").on("ajax:before", function() {
+      SingleSteps.showWait();
+    });    
+          

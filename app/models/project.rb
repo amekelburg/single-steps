@@ -2,7 +2,12 @@ require 'tasks_parser'
 require 'task_definition'
 class Project < ApplicationRecord
   # Remove extra whitespace so find-by-name-and-pin can be cleaner
-  
+  extend FriendlyId
+  friendly_id :id_and_name, use: :slugged
+  def id_and_name
+    "#{id} #{name}"
+  end
+    
   before_validation :clean_name, :clean_pin
   after_create :init_tasks
   

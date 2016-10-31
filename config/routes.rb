@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      member do
+        get :include
+        get :exclude        
+      end
+    end
     collection do
       get :find
     end

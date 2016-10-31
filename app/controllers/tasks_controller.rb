@@ -32,4 +32,24 @@ class TasksController < ApplicationController
       }
     end
   end
+  
+  def include
+    @task = Task.find(params[:id])
+    @task.inprogress!
+    respond_to do |format|
+      format.js {
+        render 'task_checkbox'
+      }
+    end
+  end
+  def exclude
+    @task = Task.find(params[:id])
+    @task.excluded!
+    respond_to do |format|
+      format.js {
+        render 'task_checkbox'
+      }
+    end
+  end
+  
 end

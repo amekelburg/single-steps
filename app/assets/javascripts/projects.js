@@ -9,4 +9,7 @@
       keyboard: false
     })
   }
+  SingleSteps.hideWait = function() {
+    $('#modal-wait').modal('hide')
+  }
 }).call(this);

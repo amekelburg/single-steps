@@ -1,5 +1,5 @@
 - skip_children ||= false
-%li{class: "task task--#{task.status} #{task.children.any? ? 'task--group' : 'task--single'}"}
+%li{class: "task task--#{task.status} #{task.children.any? ? 'task--group' : 'task--single'}", id: "task-#{task.id}"}
   - if !task.children.any?
     = render 'tasks/include_task_checkbox', task: task
   - else

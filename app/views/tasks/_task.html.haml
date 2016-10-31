@@ -1,5 +1,5 @@
 - skip_children ||= false
-%li{class: "task task--#{task.status} #{task.children.any? ? 'task--group' : 'task--single'}"}
+%li{class: "task task--#{task.status} #{task.children.any? ? 'task--group' : 'task--single'}", id: "task-#{task.id}"}
   = render 'tasks/task_checkbox', task: task
   = link_to project_task_path(task.project, task) do
     = render 'tasks/iconed_task', task: task

@@ -1,0 +1,2 @@
+$("li#task-<%= @task.id %>").replaceWith("<%= j (render 'task', task: @task) %>");
+SingleSteps.hideWait();

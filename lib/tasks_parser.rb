@@ -17,6 +17,7 @@ class TasksParser
       td = TaskDefinition.new
       td.name = row["Task_Name"]
       td.icon_name= row["icon8"]
+      td.preselect =row["Preselect"].to_s.downcase.strip=="yes"
       td.template_name = row["Template_Name"]
       td.template_url = row["Template_URL"]
       td.prereqs = row["Prereqs"]

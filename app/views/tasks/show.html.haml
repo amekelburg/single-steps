@@ -17,8 +17,8 @@
       .col-md-4
         - if @task.has_template?
           = link_to "Open Google Doc Template", @task.template_url, target: "_NEW"
-        - if @task.has_downloadable_template?
-          = link_to "Download Template as XLSX", @task.template_download_url
+        - if @task.has_template_file?
+          = link_to "Download Template as XLSX", @task.template_file_url
       
   .task--extras
     .row

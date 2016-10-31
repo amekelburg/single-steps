@@ -12,15 +12,27 @@ class Task < ApplicationRecord
     icon_path.gsub('/24/', '/48/').gsub('24.png', '48.png')
   end
   
+  def template_file_url
+    "/#{template_file_path}"
+  end
+
+  def template_file_path
+    File.join("templates", "#{template_name}.xlsx")
+  end
+  
+  def has_template_file?
+    !self.template_name.blank? && File.exists?(Rails.root.join('public', template_file_path))
+  end
+  
   def has_template?
     !template_url.blank?
   end
   
-  def has_downloadable_template?
-    !template_download_url.blank?
+  def has_downloadable_google_template?
+    !google_template_download_url.blank?
   end
   
-  def template_download_url
+  def google_template_download_url
     if template_id
       "https://docs.google.com/spreadsheets/d/#{template_id}/export?format=xlsx"
     else

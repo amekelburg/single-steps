@@ -8,12 +8,15 @@
       = link_to 'Edit', edit_project_path(@project)
       
   .row
-    .col-sm-8
+    .col-sm-6
       %h3 Activity Checklist
-    .col-sm-4
-      %h3 Task Groups
-      = link_to 'Select Tasks', select_tasks_project_path(@project)
-      .task-list
+    .col-sm-6
+      .row
+        .col-sm-6
+          %h3 Task Groups
+        .col-sm-6
+          = link_to 'Change Selections', select_tasks_project_path(@project)
+      .task-list#top-level-task-groups
         %ul
           - @tasks.each do |t|
             %li{class: "task task--#{t.status} task--group"}

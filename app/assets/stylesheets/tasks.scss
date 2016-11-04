@@ -48,6 +48,35 @@
   
 }
 
+#top-level-task-groups.task-list {
+  ul {
+    li.task--group {
+      a {
+        border-radius: 5px;
+        
+        text-align: center;
+        
+        cursor: pointer;
+        display: block;
+        color: white;
+        background: black;
+        padding: 5px 8px;
+        margin-bottom: 5px;        
+      }
+      &.task--inprogress a {
+        background: $inprogress;
+      }
+      &.task--complete a {
+        background: $complete;
+      }
+      &.task--excluded a {
+        background: $excluded;
+      }
+      
+    }
+  }
+}
+
 ul.download-links {
   list-style: none;
 }

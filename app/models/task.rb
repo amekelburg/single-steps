@@ -52,6 +52,10 @@ class Task < ApplicationRecord
     self.project.tasks.where(name: prereqs)
   end
   
+  def incomplete_prereq_tasks
+    @incomplete_prereq_tasks ||= prereq_tasks.where(state: 'inprogress')
+  end
+  
   def status
     if excluded?
       'excluded'

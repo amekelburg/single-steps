@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
+    raise ActionController::RoutingError.new('Project Not Found') if @project.nil?
     @tasks = @project.tasks.roots
   end
 

@@ -48,6 +48,11 @@
   
 }
 
+ul.download-links {
+  list-style: none;
+}
+
+
 @mixin task-action-links {
   .task-action-link {
     a {
@@ -65,17 +70,17 @@
   }
   @include task-action-links;
 }
-.task--excluded {
-  color: $excluded;
-  a, a:visited, a:hover, a:link {
-    color: $excluded;
-  }
-  @include task-action-links;
-}
 .task--complete {
   color: $complete;
   a, a:visited, a:hover, a:link {
     color: $complete;    
+  }
+  @include task-action-links;
+}
+.task--excluded {
+  color: $excluded;
+  a, a:visited, a:hover, a:link {
+    color: $excluded;
   }
   @include task-action-links;
 }
@@ -84,6 +89,9 @@ form.task__checkbox, .task__checkbox--sub {
   width: 20px;
   min-height: 1px;
   display: inline-block;
+  .incomplete-prereqs {
+    display: none;
+  }
 }
 
 form.task__checkbox--labeled {

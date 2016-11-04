@@ -11,7 +11,13 @@ body {
 img {
   @extend .img-fluid;
   margin: 0 auto;
+  &.icon {
+    display: inline-block;
+    margin: 0;
+  }
 }
+
+
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
@@ -61,6 +67,15 @@ main {
     @extend .container;
     margin-bottom: 0;
     text-align: center;
+    a, a:hover {
+      color: #2295f8;
+    }
+  }
+}
+
+#modal-confirm {
+  .modal-content {
+    
   }
 }
 

@@ -7,7 +7,9 @@ class Project < ApplicationRecord
   def id_and_name
     "#{id} #{name}"
   end
-    
+
+  after_commit :update_slug, on: :create
+
   before_validation :clean_name, :clean_pin
   after_create :init_tasks
   
@@ -58,5 +60,13 @@ class Project < ApplicationRecord
     end
     return t
   end
+
+  def update_slug
+    unless slug.include? self.id.to_s
+      self.slug = nil
+      self.save
+    end
+  end
+  
   
 end

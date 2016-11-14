@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :unassign_user, :select_tasks]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :unassign_user, :select_tasks, :all_tasks]
   # GET /projects
   # GET /projects.json
   def index
@@ -44,6 +44,10 @@ class ProjectsController < ApplicationController
   
   def select_tasks
     @tasks = @project.tasks.roots
+  end
+  
+  def all_tasks
+    @task = @project #override the concept of the "parent" task for nested groups
   end
 
   # POST /projects

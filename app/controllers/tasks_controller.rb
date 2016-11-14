@@ -31,9 +31,12 @@ class TasksController < ApplicationController
           @task = task
           render 'include_task_checkbox'
         else
-          @task = Task.find(params[:parent_task])
-          @project = @task.project
-          render 'task_checkbox'
+          set_task_and_project_from_parent
+          if @task.is_a?(Project)
+            render 'all_tasks'
+          else
+            render 'task_checkbox'
+          end
         end
       }
     end
@@ -42,24 +45,41 @@ class TasksController < ApplicationController
   def include
     selected_task = Task.find(params[:id])
     selected_task.inprogress!
-    @task = Task.find(params[:parent_task])
-    @project = @task.project
+    set_task_and_project_from_parent
     respond_to do |format|
       format.js {
-        render 'task_checkbox'
+        if @task.is_a?(Project)
+          render 'all_tasks'
+        else
+          render 'task_checkbox'
+        end
       }
     end
   end
   def exclude
     selected_task = Task.find(params[:id])
     selected_task.excluded!
-    @task = Task.find(params[:parent_task])
-    @project = @task.project
+    set_task_and_project_from_parent
     respond_to do |format|
       format.js {
-        render 'task_checkbox'
+        if @task.is_a?(Project)
+          render 'all_tasks'
+        else
+          render 'task_checkbox'
+        end
       }
     end
+  end
+  
+  private
+  def set_task_and_project_from_parent
+    @task = Task.find_by_id(params[:parent_task])
+    if @task
+      @project = @task.project
+    else
+      @project = Project.find_by_id(params[:parent_task])
+      @task = @project
+    end    
   end
   
 end

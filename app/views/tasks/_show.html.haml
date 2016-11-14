@@ -3,6 +3,7 @@
     .row
       .col-md-12
         %h3= link_to @project.name, @project
+        %h6= link_to "All Tasks", all_tasks_project_path(@project)
   .task--info
     .row
       .col-md-8

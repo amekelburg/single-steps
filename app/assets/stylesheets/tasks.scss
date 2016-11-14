@@ -71,8 +71,7 @@
       }
       &.task--excluded a {
         background: $excluded;
-      }
-      
+      }            
     }
   }
 }
@@ -87,7 +86,7 @@ ul.download-links {
 @mixin task-action-links {
   .task-action-link {
     a {
-      color: blue;
+      color: $blue;
       font-size: .8em;
       text-decoration: underline;
     }

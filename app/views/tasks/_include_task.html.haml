@@ -3,7 +3,8 @@
   - if !task.children.any?
     = render 'tasks/include_task_checkbox', task: task
   - else
-    = render 'tasks/iconed_task', task: task
+    = link_to  project_task_path(task.project, task) do
+      = render 'tasks/iconed_task', task: task
     - if !skip_children
       .task-list
         %ul

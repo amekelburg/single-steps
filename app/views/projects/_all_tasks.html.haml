@@ -1,0 +1,12 @@
+.container{id: "project-#{@project.id}"}
+  .row
+    .col-xs-12
+      %h2 
+        All Tasks for
+        = link_to @project.name, @project
+  .row
+    .col-xs-12
+      .task-list
+        %ul
+          - @project.children.each do |task|      
+            = render 'tasks/task', task: task

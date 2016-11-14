@@ -30,6 +30,37 @@ class Project < ApplicationRecord
     init_tasks
   end
   
+  def status
+    if excluded?
+      'excluded'
+    elsif complete?
+      'complete'
+    else
+      'inprogress'
+    end
+  end
+  
+  def children
+    tasks.roots
+  end
+  
+  def complete?
+    if children.any?
+      children.all? {|c| c.complete? || c.excluded? }
+    else
+      super
+    end
+  end
+  
+  def excluded?
+    if children.any?
+      children.all?(&:excluded?)
+    else
+      super
+    end
+  end
+  
+  
   private
   def clean_name
     self.name = self.name.to_s.strip

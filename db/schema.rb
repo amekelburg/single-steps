@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114142900) do
+ActiveRecord::Schema.define(version: 20161114162428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 20161114142900) do
     t.integer  "project_id"
     t.integer  "parent_id"
     t.integer  "sort_order"
-    t.integer  "state",         default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "state",             default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "download_location"
     t.index ["name"], name: "index_tasks_on_name", using: :btree
     t.index ["parent_id"], name: "index_tasks_on_parent_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree

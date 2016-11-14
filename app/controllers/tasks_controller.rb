@@ -20,6 +20,8 @@ class TasksController < ApplicationController
     elsif params[:task]["task_#{task.id}_complete"]=="0"
       update_type=:completion
       task.inprogress!
+    else
+      task.update_attributes!(task_params)
     end
     respond_to do |format|
       format.html { 
@@ -80,6 +82,9 @@ class TasksController < ApplicationController
       @project = Project.find_by_id(params[:parent_task])
       @task = @project
     end    
+  end
+  def task_params
+    params.require(:task).permit(:download_location)
   end
   
 end

@@ -70,6 +70,16 @@ class Task < ApplicationRecord
     @complete_dependencies ||= included_dependencies.select {|t| t.complete? }
   end
   
+  def download_status
+    if excluded? 
+      'excluded'
+    elsif download_location.blank?
+      'inprogress'
+    else
+      'complete'
+    end
+  end
+  
   def status
     if excluded?
       'excluded'

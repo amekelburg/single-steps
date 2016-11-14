@@ -33,15 +33,14 @@
             = render 'tasks/parent_task_group', task: @task.parent
       
         .col-md-6
-          - if @task.completable?
-            Relies on:
-            - if @task.prereq_tasks.any?
-              - @task.prereq_tasks.each do |pre_task|
-                %span.task{class: "task--#{pre_task.status}"}
-                  = link_to project_task_path(pre_task.project, pre_task) do
-                    = render 'tasks/iconed_task', task: pre_task
-            - else
-              none
+          Relies on:
+          - if @task.prereq_tasks.any?
+            - @task.prereq_tasks.each do |pre_task|
+              %span.task{class: "task--#{pre_task.status}"}
+                = link_to project_task_path(pre_task.project, pre_task) do
+                  = render 'tasks/iconed_task', task: pre_task
+          - else
+            none
   .task--description
     .row
       .col-sm-12

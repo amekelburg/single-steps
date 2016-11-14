@@ -115,13 +115,13 @@ ul.download-links {
   @include task-action-links;
 }
 
+.excluded-prereqs, .incomplete-prereqs, .included-dependencies, .complete-dependencies {
+  display: none;
+}
 form.task__checkbox, .task__checkbox--sub {
   width: 20px;
   min-height: 1px;
   display: inline-block;
-  .incomplete-prereqs {
-    display: none;
-  }
 }
 
 form.task__checkbox--labeled {

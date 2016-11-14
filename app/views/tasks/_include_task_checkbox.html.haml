@@ -1,5 +1,9 @@
-- label ||= render 'tasks/iconed_task', task: task
+- label ||= nil
 = form_for [task.project, task], :html=>{class: 'task__checkbox task__checkbox--labeled'}, remote: true, :authenticity_token => true do |f|
-  = f.check_box "task_#{task.id}_included", onclick: 'SingleSteps.showWait(); $(this.form).submit()', checked: task.included?
-= link_to  project_task_path(task.project, task) do
-  = label
+  = render 'tasks/incomplete_prereqs', task: task
+  = f.check_box "task_#{task.id}_included", onclick: render('tasks/change_completion_script', task: task, action: (task.included? ? 'exclude' : 'include')), checked: task.included?
+  - if label
+    = f.label "task_#{task.id}_included", label
+- if !label
+  = link_to  project_task_path(task.project, task) do
+    = render 'tasks/iconed_task', task: task

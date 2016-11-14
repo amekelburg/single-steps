@@ -13,9 +13,11 @@
     $('#modal-wait').modal('hide')
   }  
   
-  SingleSteps.confirmDialog = function(body, onConfirm, onCancel) {
+  SingleSteps.confirmDialog = function(body,  taskDependency, onConfirm, onCancel) {
     var $modal = $('#modal-confirm');
-    $modal.find('.prereq-list').html(body)    
+    $modal.find('.prereq-list').html(body); 
+    $modal.find('.task-dependency').html(taskDependency);
+    
     $modal.modal({
       backdrop: 'static',
       keyboard: false
@@ -37,34 +39,67 @@
     $modal.on('click', '.btn-submit', confirmHandler);
   }
   
-  SingleSteps.changeCompletion = function(form) {
-    var $form = $(form)
+  SingleSteps.changeCompletion = function(element, taskName, actionType, event) {
+    var $form = $(element.form);
+    
+    if ($(element).hasClass('confirmed')) {
+      $(element).removeClass('confirmed');
+      // And continue with default actions w/out checking prereq chain
+      return true;
+    }
     var $checkbox = $form.find('input[type=checkbox]');
-    var isCompletingTask = $checkbox.is(':checked');
-    if (isCompletingTask) {
-      var $incompletePreReqs = $form.find('.incomplete-prereqs');
-      var numIncomplete = $incompletePreReqs ? parseInt($incompletePreReqs.data('count') || 0) : 0;
-      if (numIncomplete > 0) {
-        SingleSteps.confirmDialog($incompletePreReqs.html(), function($form) {
-          SingleSteps.showWait(); 
-          console.log($form);
-          SingleSteps.submitForm($form);
-        }.bind(this, $form), function($checkbox) {
-          $checkbox.attr('checked', false);           
-        }.bind(this, $checkbox))
-      } else {
-        SingleSteps.showWait(); 
-        SingleSteps.submitForm($form);
+    var checkPreReqs = actionType == 'complete' || actionType == 'include';    
+    var $dependencies = null;
+    var taskDependency = taskName + ' is related to';
+    if (actionType=='include') {
+      taskDependency = taskName + ' depends on the following excluded tasks:'
+      $dependencies = element.form ? $form.find('.incomplete-prereqs') : $(element).siblings('.excluded-prereqs');      
+    } else if (actionType=='complete') {
+      taskDependency = taskName + " depends on the following tasks, which aren't complete or haven't been selected:"
+      $dependencies = element.form ? $form.find('.incomplete-prereqs') : $(element).siblings('.incomplete-prereqs');
+    } else if (actionType == 'exclude') {
+      //Check included dependencies   
+      taskDependency = 'The following active or completed tasks depend on ' + taskName + ':'
+      $dependencies = element.form ? $form.find('.included-dependencies') : $(element).siblings('.included-dependencies');   
+    } else {
+      //actionType == 'inprogress'
+      //Check completed dependencies
+      taskDependency = 'The following completed tasks depend on ' + taskName + ':'
+      $dependencies = element.form ? $form.find('.complete-dependencies') : $(element).siblings('.complete-dependencies');   
+    }
+    
+    var numIncomplete = $dependencies ? parseInt($dependencies.data('count') || 0) : 0;
+    if (numIncomplete > 0) {
+      /// only stop if there's no form
+      if (!element.form) {
+        event.stopPropagation();
+        event.preventDefault();                      
       }
+      SingleSteps.confirmDialog($dependencies.html(), taskDependency, function(element) {
+        SingleSteps.showWait(); 
+        SingleSteps.continueAction(element, event);
+        return true;
+      }.bind(this, element), function($checkbox, element) {
+        // set to original state
+        $checkbox.prop('checked', !$checkbox.prop('checked'));    
+        return false;       
+      }.bind(this, $checkbox, element))
     } else {
       SingleSteps.showWait(); 
-      SingleSteps.submitForm($form);
-    }  
+      SingleSteps.continueAction(element, event);
+      return true;
+    }
   }
   
-  SingleSteps.submitForm = function($form) {
-    $form.trigger('submit.rails');
+  SingleSteps.continueAction = function(element, event) {
+    if (element.form) {
+      $(element.form).trigger('submit.rails');      
+    } else {
+      $(element).addClass('confirmed')
+      $(element).trigger('click');
+    }
   }
+  
   
   
 }).call(this);

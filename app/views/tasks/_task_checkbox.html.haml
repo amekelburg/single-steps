@@ -2,13 +2,8 @@
 - if task.completable?
   = form_for [task.project, task], :html=>{class: "task__checkbox #{label ? 'task__checkbox--labeled' : ''}"}, remote: true, :authenticity_token => true do |f|
     = hidden_field_tag :parent_task, @task.id
-    .incomplete-prereqs{'data-count': task.incomplete_prereq_tasks.count}
-      %ul
-        - task.incomplete_prereq_tasks.each do |t|
-          %li.incomplete-prereq= t.name
-          
-        
-    = f.check_box "task_#{task.id}_complete?", onclick: 'SingleSteps.changeCompletion(this.form)', checked: task.complete?
+    = render 'tasks/incomplete_prereqs', task: task
+    = f.check_box "task_#{task.id}_complete?", onclick: render('tasks/change_completion_script', task: task, action: (task.complete? ? 'inprogress' : 'complete')), checked: task.complete?
     - if label
       = f.label "task_#{task.id}_complete?", label
 - else

@@ -53,7 +53,21 @@ class Task < ApplicationRecord
   end
   
   def incomplete_prereq_tasks
-    @incomplete_prereq_tasks ||= prereq_tasks.where(state: 'inprogress')
+    @incomplete_prereq_tasks ||= prereq_tasks.where(state: [:inprogress, :excluded])
+  end
+  
+  def excluded_prereq_tasks
+    @excluded_prereq_tasks ||= prereq_tasks.where(state: :excluded)
+  end
+  
+  def dependencies
+    @dependencies ||= self.project.tasks.select {|t| t.prereqs.include? self.name }
+  end
+  def included_dependencies
+    @included_dependencies ||= dependencies.select {|t| t.included? }
+  end
+  def complete_dependencies
+    @complete_dependencies ||= included_dependencies.select {|t| t.complete? }
   end
   
   def status

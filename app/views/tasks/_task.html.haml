@@ -6,12 +6,15 @@
   - if task.completable?
     &nbsp;
     %span{id: "task-#{task.id}-include", class: 'task-action-link task-link--exclude'}
-      = link_to 'remove', exclude_project_task_path(task.project, task, parent_task: @task), remote: true    
+      = link_to 'remove', exclude_project_task_path(task.project, task, parent_task: @task), remote: true, onclick: render('tasks/change_completion_script', task: task, action: 'exclude')
+      = render 'tasks/incomplete_prereqs', task: task
+      
   -elsif task.includable?
     &nbsp;
     %span{id: "task-#{task.id}-include", class: 'task-action-link task-link--include'}
-      = link_to '+add', include_project_task_path(task.project, task, parent_task: @task), remote: true    
-  
+      = link_to '+add', include_project_task_path(task.project, task, parent_task: @task), remote: true, onclick: render('tasks/change_completion_script', task: task, action: 'include') 
+      = render 'tasks/incomplete_prereqs', task: task
+      
   - if !skip_children && task.children.any?
     .task-list
       %ul

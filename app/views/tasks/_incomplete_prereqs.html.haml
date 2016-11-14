@@ -1,0 +1,22 @@
+.excluded-prereqs{'data-count': task.excluded_prereq_tasks.count}
+  %ul
+    - task.excluded_prereq_tasks.each do |t|
+      %li.incomplete-prereq{class: "task--#{t.status}"}
+        = link_to t.name, project_task_path(t.project, t)
+.incomplete-prereqs{'data-count': task.incomplete_prereq_tasks.count}
+  %ul
+    - task.incomplete_prereq_tasks.each do |t|
+      %li.incomplete-prereq{class: "task--#{t.status}"}
+        = link_to t.name, project_task_path(t.project, t)
+        = t.excluded? ? '(not selected)' : '(incomplete)'
+.complete-dependencies{'data-count': task.complete_dependencies.count}
+  %ul
+    - task.complete_dependencies.each do |t|
+      %li.incomplete-prereq{class: "task--#{t.status}"}
+        = link_to t.name, project_task_path(t.project, t)
+.included-dependencies{'data-count': task.included_dependencies.count}
+  %ul
+    - task.included_dependencies.each do |t|
+      %li.incomplete-prereq{class: "task--#{t.status}"}
+        = link_to t.name, project_task_path(t.project, t)
+        = t.complete? ? '(completed)' : ''

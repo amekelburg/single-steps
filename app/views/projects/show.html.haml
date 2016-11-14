@@ -25,8 +25,13 @@
               %strong= t.name
               template downloaded and saved to
               = form_for [t.project, t] do |f|
-                = f.text_field :download_location
-                = f.submit "Save"
+                - if t.download_location.blank?
+                  = f.text_field :download_location
+                  = f.submit "Save"
+                - else 
+                  %strong= t.download_location
+                  = f.hidden_field :download_location, value: ""
+                  = f.submit "Remove"
             %li{class: "task--#{t.status}"}
               %strong= t.name
               = "tasks #{t.status_label}"

@@ -7,3 +7,27 @@
     margin-bottom: 2em;
   }
 }
+.activity-checklist {
+  li 
+  { 
+    list-style: none;
+    margin-bottom: .5em;
+    &:before
+    {
+      display: block;
+      content: "\2610";
+      margin-right:0px;
+      margin-left: -25px;
+      float: left;
+    }
+
+    &.task--complete:before
+    {
+        content: "\2611";
+    }    
+    &.task--excluded:before {
+      content: "\2612";      
+    }
+    
+  }
+}

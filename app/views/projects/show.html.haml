@@ -17,15 +17,19 @@
       %ul.activity-checklist
         - @tasks.each do |t|
           - if t.excluded?
-            %li{class: "task--#{t.status}"}= "#{t.name} excluded"
+            %li{class: "task--#{t.status}"}
+              %strong= t.name
+              excluded
           - else
             %li{class: "task--#{t.download_status} task-group-#{t.id}--downloaded"}
-              = "#{t.name} template downloaded and saved to"
+              %strong= t.name
+              template downloaded and saved to
               = form_for [t.project, t] do |f|
                 = f.text_field :download_location
                 = f.submit "Save"
             %li{class: "task--#{t.status}"}
-              = "#{t.name} tasks completed"
+              %strong= t.name
+              = "tasks #{t.status_label}"
     .col-sm-6
       .row
         .col-sm-6

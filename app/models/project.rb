@@ -18,7 +18,7 @@ class Project < ApplicationRecord
   
   
   validates :name, uniqueness: { case_sensitive: false}
-  validates_presence_of :name, :pin
+  validates_presence_of :name, :pin, :email
   
   
   def self.find_by_name_and_pin(name, pin)

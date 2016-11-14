@@ -5,6 +5,7 @@
       %ul
         - @project.errors.full_messages.each do |msg|
           %li= msg
-  = f.text_field :name
-  = f.text_field :pin
+  = f.text_field :name, required: true
+  = f.text_field :pin, required: true
+  = f.text_field :email, label: "Project Team Contact Email Address", required: true, type: :email
   = f.submit 'Save'

@@ -62,13 +62,20 @@ main {
   line-height: 1.5em;
   font-size: 16px;
   background: $dark-gray;
-  color: white;
+  color: $gray;
   p {
+    max-width: 700px;
     @extend .container;
     margin-bottom: 0;
     text-align: center;
     a, a:hover {
-      color: #2295f8;
+      color: $orange;
+    }
+  }
+  p.feedback {
+    color: white;
+    a {
+      color: $green;
     }
   }
 }

@@ -9,7 +9,6 @@
       .col-md-8
         %h2.task{class: "task--#{@task.status}"}
           = render 'iconed_task', task: @task, large: true
-          = "(#{@task.status_label})"
         - if @task.included? 
           = render 'task_checkbox', task: @task, label: (@task.complete? ? "Completed!" : "Mark Complete")
         - if @task.excluded? && @task.includable?

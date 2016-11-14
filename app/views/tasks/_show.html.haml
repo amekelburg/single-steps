@@ -23,12 +23,6 @@
                 %img.icon{src: icon_path("User_Interface", "open_in_window")}
                 Open Google Doc Template
               
-          - if @task.has_template_file?
-            %li
-              = link_to @task.template_file_url do
-                %img.icon{src: icon_path("User_Interface", "downloading_updates")}
-                Download Template as XLSX
-              
       
   .task--extras
     .row

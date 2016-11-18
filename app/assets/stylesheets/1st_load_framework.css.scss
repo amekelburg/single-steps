@@ -69,13 +69,12 @@ main {
     margin-bottom: 0;
     text-align: center;
     a, a:hover {
-      color: $orange;
+      color: $light-blue;
     }
   }
   p.feedback {
-    color: white;
     a {
-      color: $green;
+      color: $orange;
     }
   }
 }

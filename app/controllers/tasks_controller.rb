@@ -84,7 +84,7 @@ class TasksController < ApplicationController
     end    
   end
   def task_params
-    params.require(:task).permit(:download_location)
+    params.require(:task).permit(:download_location, :download_complete)
   end
   
 end

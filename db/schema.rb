@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114162428) do
+ActiveRecord::Schema.define(version: 20161117235447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161114162428) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "download_location"
+    t.boolean  "download_complete"
     t.index ["name"], name: "index_tasks_on_name", using: :btree
     t.index ["parent_id"], name: "index_tasks_on_parent_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree

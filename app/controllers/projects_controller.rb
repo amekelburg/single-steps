@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
         if current_user
           current_user.add_project(@project)
         end
-        format.html { redirect_to select_tasks_project_path(@project), notice: 'Project was successfully created.' }
+        format.html { redirect_to all_tasks_project_path(@project), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }

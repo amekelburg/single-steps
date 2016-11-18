@@ -20,4 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  admin: 
+    table:
+      project_name_header: Project Name
+      project_email_header:  Contact Email
+      project_link_header: Link
+      project_link_text: view
+  project:
+  task:
+    modal_confirm:
+      title: Are you sure?
+      cancel: Cancel
+      continue: Continue
+        

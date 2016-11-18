@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
   devise_for :users
   resources :users
+  namespace :admin do 
+    resources :projects, only: :index
+  end
+  
   resources :projects do
     resources :tasks do
       member do

@@ -1,0 +1,11 @@
+%h3 All Projects
+%table.table
+  %tr
+    %th= t 'admin.table.project_name_header'
+    %th= t 'admin.table.project_email_header'
+    %th= t 'admin.table.project_link_header' 
+  - @projects.each do |p|
+    %tr
+      %td= p.name
+      %td= p.email
+      %td= link_to t('admin.table.project_link_text'), p

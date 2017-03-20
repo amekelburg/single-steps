@@ -4,6 +4,9 @@
       %h2 
         All Tasks for
         = link_to @project.name, @project
+      = link_to "https://drive.google.com/drive/u/0/folders/0Bx9xWWOdodAlUW45dnkwSjBFejA", target: "_NEW" do
+        Open Folder of All Google Doc Templates
+        %img.icon{src: icon_path("User_Interface", "open_in_window")}
   .row
     .col-xs-12
       .task-list

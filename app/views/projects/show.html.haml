@@ -45,7 +45,7 @@
                   = f.hidden_field :download_complete, value: false
                   = f.hidden_field :download_location, value: ""                  
                   = f.hidden_field :new_download_location, value: t.download_location
-                  = f.submit "Change Spreadsheet Location"
+                  = f.submit "Remove Spreadsheet Location"
             %li{class: "task--#{t.status}"}
               .checkbox=t.complete? ? "\u2611" : "\u2610"
               %strong= t.name

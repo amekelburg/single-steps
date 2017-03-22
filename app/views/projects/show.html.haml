@@ -29,9 +29,7 @@
                   = f.hidden_field :download_complete, value: !t.download_complete?
                   = f.hidden_field :download_location, value: t.download_complete? ? '' : t.download_location
               = form_for [t.project, t] do |f|
-                Modifiable
-                %strong= t.name
-                spreadsheets for this project created.
+                Modifiable spreadsheets for this project created.
                 - if t.download_location.blank?
                   = f.label :download_location, "Enter Spreadsheet Location: "
                   = f.text_field :download_location
@@ -40,7 +38,7 @@
                 - else 
                   %strong
                     %a{href: t.download_location, target: "_NEW"} 
-                      Open Spreadsheet
+                      Go to Spreadsheets
                       %img.icon{src: icon_path("User_Interface", "open_in_window")}
                   = f.hidden_field :download_complete, value: false
                   = f.hidden_field :download_location, value: ""                  
